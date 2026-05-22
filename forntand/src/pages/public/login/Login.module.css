@@ -1,7 +1,64 @@
-.input{
-   
+
+.conteiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
 }
 
-.button{
-    padding: 8px;
+
+.acesso {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 8px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.acesso h1 {
+  margin-bottom: 8px;
+  font-size: 28px;
+  text-align: center;
+ 
+}
+
+.acesso p {
+    color: #888;
+    text-align: center;
+  margin-bottom: 24px;
+  font-size: 28px;
+ 
+}
+
+.input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #252525;
+}
+
+.linkacc {
+  font-size: 12px;
+  color: #0066cc;
+  text-decoration: none;
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.button {
+  padding: 12px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background-color: #004499;
 }
