@@ -1,17 +1,13 @@
+import "./App.css";
+import Cadastro from "./pages/public/login/cadastro";
 
-import './App.css'
-
-function App() { //java script e type
- 
- 
-
+function App() {
+  //java script e type
   return (
-    // html e css
     <>
-   KAUAN
-  
-   </>   
-  ) ///trablhar css Fim
+    <Cadastro></Cadastro>
+    </>
+  );
 }
 
-export default App
+export default App;
