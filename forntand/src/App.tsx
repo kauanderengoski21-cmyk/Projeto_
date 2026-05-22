@@ -1,5 +1,5 @@
 import "./App.css";
-import Cadastro from "./pages/public/login/cadastro";
+import Cadastro from "./pages/public/login/Cadastro";
 
 function App() {
   //java script e type
