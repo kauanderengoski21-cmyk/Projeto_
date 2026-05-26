@@ -1,11 +1,19 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Cadastro from "./pages/public/login/Cadastro";
 
 function App() {
-  //java script e type
   return (
     <>
-    <Cadastro></Cadastro>
+      <ToastContainer
+        autoClose={3000}
+        theme="dark"
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        closeOnClick
+      />
+      <Cadastro></Cadastro>
     </>
   );
 }

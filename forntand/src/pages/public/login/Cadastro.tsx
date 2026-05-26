@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./Cadastro.module.css";
+import { toast } from "react-toastify";
 
 function Cadastro() {
   const [email, setEmail] = useState("");
@@ -7,29 +8,44 @@ function Cadastro() {
   const [cnpj, setCnpj] = useState("");
 
   function exibirDados() {
-    console.log("Email:", email);
-    console.log("Senha:", senha);
-    console.log("CNPJ:", cnpj);
-    
     if (validarDados({ email, senha, cnpj })) {
-      alert("Cadastro realizado com sucesso!");
+      toast.success("Cadastro realizado com sucesso!");
+      console.log("Email:", email);
+      console.log("Senha:", senha);
+      console.log("CNPJ:", cnpj);
+      setEmail("");
+      setSenha("");
+      setCnpj("");
     }
   }
 
-  function validarDados({ email, senha, cnpj }: { email: string; senha: string; cnpj: string }) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
-    if (!emailRegex.test(email)) {
-      alert("Email inválido.");
-      return false;
-    }
-    if (senha.length < 8) {
-      alert("A senha deve conter pelo menos 8 caracteres.");
+  function validarDados({
+    email,
+    senha,
+    cnpj,
+  }: {
+    email: string;
+    senha: string;
+    cnpj: string;
+  }) {
+    if (!email.trim() || !senha.trim() || !cnpj.trim()) {
+      toast.error("Por favor, preencha todos os campos!");
       return false;
     }
 
-    const cnpjLimpo = cnpj.replace(/[^\d]/g, ""); 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Email inválido.");
+      return false;
+    }
+    if (senha.length < 8) {
+      toast.error("A senha deve conter pelo menos 8 caracteres.");
+      return false;
+    }
+
+    const cnpjLimpo = cnpj.replace(/[^\d]/g, "");
     if (cnpjLimpo.length !== 14) {
-      alert("CNPJ deve conter 14 dígitos.");
+      toast.error("CNPJ deve conter 14 dígitos.");
       return false;
     }
 
@@ -41,7 +57,7 @@ function Cadastro() {
       <div className={style.quadrado}>
         <h1>Cadastro</h1>
         <p>Faça seu cadastro para acessar o sistema</p>
-        
+
         <label>Seu Email</label>
         <input
           type="email"
@@ -50,7 +66,7 @@ function Cadastro() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        
+
         <label>Senha</label>
         <input
           type="password"
@@ -59,7 +75,7 @@ function Cadastro() {
           onChange={(e) => setSenha(e.target.value)}
           required
         />
-        
+
         <label>CNPJ</label>
         <input
           type="text"
@@ -68,9 +84,9 @@ function Cadastro() {
           onChange={(e) => setCnpj(e.target.value)}
           required
         />
-        
+
         <button onClick={exibirDados}>Cadastrar</button>
-        
+
         <div className={style.linksRodape}>
           <a href="#">mais informações</a>
           <a href="#">página de login</a>
