@@ -3,9 +3,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Cadastro from "./pages/public/login/Cadastro";
 
+
 function App() {
+
   return (
     <>
+
       <ToastContainer
         autoClose={3000}
         theme="dark"
@@ -17,5 +20,4 @@ function App() {
     </>
   );
 }
-
 export default App;
