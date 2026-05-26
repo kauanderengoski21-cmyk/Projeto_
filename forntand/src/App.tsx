@@ -1,18 +1,23 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import Cadastro from "./pages/public/login/Cadastro";
 
-import './App.css'
-import Login from './pages/public/login/Login'
 
-function App() { //java script e type
- 
- 
+function App() {
 
   return (
-    // html e css
     <>
-<Login></Login>
 
-   </>   
-  ) ///trablhar css e html Fim
+      <ToastContainer
+        autoClose={3000}
+        theme="dark"
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        closeOnClick
+      />
+      <Cadastro></Cadastro>
+    </>
+  );
 }
-
-export default App
+export default App;
