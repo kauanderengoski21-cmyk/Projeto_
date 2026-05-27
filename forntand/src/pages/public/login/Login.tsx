@@ -1,54 +1,85 @@
 import { useState } from "react";
 import style from "./Login.module.css";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
-  const [email, setEmail] = useState<string>("teste");
-  const [password, setPassword] = useState<string>("");
-  
-  const [erro, setErro] = useState<string>("");
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  function exibirEmail() {
-    
-    if (!email.includes("@") || password.length < 6) {
-      setErro("Email ou senha incorretos.");
-      return;
+  function exibirDados() {
+    if (validarDados({ email, password })) {
+      toast.success("Login realizado com sucesso!");
+      console.log("Email:", email);
+      navigate("/home");
+    }
+  }
+
+  function validarDados({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) {
+    if (!email.trim() || !password.trim()) {
+      toast.error("Por favor, preencha todos os campos!");
+      return false;
     }
 
-    setErro(""); 
-    console.log(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Email inválido.");
+      return false;
+    }
+
+    if (password.length < 6) {
+      toast.error("A senha deve conter pelo menos 6 caracteres.");
+      return false;
+    }
+
+    return true;
   }
 
   return (
     <div className={style.conteiner}>
       <div className={style.acesso}>
-        <h1>Bem-vindo!!</h1>
-        <p>faça seu login</p>
-    
-        <input  
-          className={style.input} 
-          type="email" 
-          placeholder="email"  
-          value={email}
-          onChange={(html) => setEmail(html.target.value)}
-        />
-    
+        <h1>Login</h1>
+        <p>Faça seu login para acessar o sistema</p>
+
+        <label htmlFor="email">Seu Email</label>
         <input
+          id="email"
           className={style.input}
-          type="password"
-          placeholder="senha"
-          value={password}
-          onChange={(html) => setPassword(html.target.value)}
+          type="email"
+          placeholder="Digite seu email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
 
-        
-        {erro  && <span className={style.erroMensagem}>{erro}</span>}
-        <a className={style.linkacc} href="https://earth3dmap.com/">
-          esqueceu sua senha? clique aqui:
-        </a>
-    
-        <button className={style.button} onClick={exibirEmail}>
-          acessar
+        <label htmlFor="password">Senha</label>
+        <input
+          id="password"
+          className={style.input}
+          type="password"
+          placeholder="Digite sua senha"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <button className={style.button} onClick={exibirDados}>
+          Acessar
         </button>
+
+        <div className={style.linksRodape}>
+          <a className={style.linkacc} href="https://earth3dmap.com/">
+            Esqueceu sua senha?
+          </a>
+          <Link to="/cadastro">Cadastre-se</Link>
+        </div>
       </div>
     </div>
   );

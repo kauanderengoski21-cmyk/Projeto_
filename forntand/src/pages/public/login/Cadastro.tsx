@@ -1,8 +1,10 @@
 import { useState } from "react";
 import style from "./Cadastro.module.css";
 import { toast } from "react-toastify";
+import { useNavigate, Link } from "react-router-dom";
 
 function Cadastro() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [cnpj, setCnpj] = useState("");
@@ -16,6 +18,7 @@ function Cadastro() {
       setEmail("");
       setSenha("");
       setCnpj("");
+      setTimeout(() => navigate("/login"), 2000);
     }
   }
 
@@ -58,8 +61,9 @@ function Cadastro() {
         <h1>Cadastro</h1>
         <p>Faça seu cadastro para acessar o sistema</p>
 
-        <label>Seu Email</label>
+        <label htmlFor="email">Seu Email</label>
         <input
+          id="email"
           type="email"
           placeholder="Digite seu email"
           value={email}
@@ -67,8 +71,9 @@ function Cadastro() {
           required
         />
 
-        <label>Senha</label>
+        <label htmlFor="senha">Senha</label>
         <input
+          id="senha"
           type="password"
           placeholder="Digite sua senha"
           value={senha}
@@ -76,8 +81,9 @@ function Cadastro() {
           required
         />
 
-        <label>CNPJ</label>
+        <label htmlFor="cnpj">CNPJ</label>
         <input
+          id="cnpj"
           type="text"
           placeholder="Digite o cnpj"
           value={cnpj}
@@ -89,7 +95,7 @@ function Cadastro() {
 
         <div className={style.linksRodape}>
           <a href="#">mais informações</a>
-          <a href="#">página de login</a>
+          <Link to="/login">voltar para o login</Link>
         </div>
       </div>
 
