@@ -1,7 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import Cadastro from "./pages/public/login/Cadastro";
+import Cadastro from "./pages/public/cadastro/Cadastro";
 
 
 function App() {
