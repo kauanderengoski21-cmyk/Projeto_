@@ -2,20 +2,32 @@ import { useState } from "react";
 import style from "./Login.module.css";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Service } from "../../../components/services/Service";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function exibirDados() {
+  async function fazerLogin() {
     if (validarDados({ email, password })) {
       toast.success("Login realizado com sucesso!");
       console.log("Email:", email);
       navigate("/home");
+      
+      try{  
+    const  respostaDoServidor = await Service.GET("efetuarLogin", {
+        email: email,
+        senha: password,
+      });
+
+      console.log (respostaDoServidor);
+    
+    } catch (erro) {
+      console.log (erro);
+    }
     }
   }
-
   function validarDados({
     email,
     password,
@@ -70,7 +82,7 @@ function Login() {
           required
         />
 
-        <button className={style.button} onClick={exibirDados}>
+        <button className={style.button} onClick={fazerLogin}>
           Acessar
         </button>
 
