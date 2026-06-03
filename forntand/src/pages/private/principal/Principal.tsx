@@ -1,7 +1,29 @@
+import { useState } from "react";
 import styles from "./Principal.module.css";
 
+type StatusSistema = {
+  produtosEmTransporte: number;
+  veiculosAtivos: number;
+  alertasAtivos: number;
+  entregasConcluidas: number;
+};
 
 function Inicio() {
+  const [status, setStatus] = useState<StatusSistema>({
+    produtosEmTransporte: 15,
+    veiculosAtivos: 8,
+    alertasAtivos: 2,
+    entregasConcluidas: 120
+  });
+
+  const finalizarEntrega = (): void => {
+    setStatus((estadoAnterior) => ({
+      ...estadoAnterior,
+      produtosEmTransporte: estadoAnterior.produtosEmTransporte - 1,
+      entregasConcluidas: estadoAnterior.entregasConcluidas + 1
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -31,11 +53,11 @@ function Inicio() {
 
       <section>
         <h2>Status do Sistema</h2>
-
-        <p> Produtos em Transporte: 15</p>
-        <p> Veículos Ativos: 8</p>
-        <p> Alertas Ativos: 2</p>
-        <p> Entregas Concluídas: 120</p>
+        
+        <p> Produtos em Transporte: {status.produtosEmTransporte}</p>
+        <p> Veículos Ativos: {status.veiculosAtivos}</p>
+        <p> Alertas Ativos: {status.alertasAtivos}</p>
+        <p> Entregas Concluídas: {status.entregasConcluidas}</p>
       </section>
 
       <hr />
@@ -43,30 +65,36 @@ function Inicio() {
       <section>
         <h2>Monitoramento em Tempo Real</h2>
 
-        <ul>
-          <li>Veículo V-001 em rota para São Paulo</li>
-          <li>Veículo V-005 próximo ao destino</li>
-          <li>Alerta de velocidade detectado no veículo V-003</li>
-        </ul>
+        
+        <div className={styles.listaAlertas}>
+          <div className={`${styles.alertaCard} ${styles.info}`}>
+            <span className={styles.statusBadge}>Em Rota</span>
+            <p>Veículo V-001 em rota para o destino.</p>
+          </div>
+
+          <div className={`${styles.alertaCard} ${styles.sucesso}`}>
+            <span className={styles.statusBadge}>Quase Lá</span>
+            <p>Veículo V-005 próximo ao destino.</p>
+          </div>
+
+          <div className={`${styles.alertaCard} ${styles.perigo}`}>
+            <span className={styles.statusBadge}>Aviso</span>
+            <p>Alerta de velocidade detectado no veículo V-003.</p>
+          </div>
+        </div>
       </section>
 
-      <hr />
+      
 
-      <section>
+     <section>
         <h2>Ações Rápidas</h2>
-
         <button>Novo Produto</button>
         <button>Cadastrar Veículo</button>
         <button>Criar Rota</button>
-        <button>Gerar Relatório</button>
+       
+        <button onClick={finalizarEntrega}>Simular Conclusão de Entrega</button>
       </section>
 
-      <hr />
-
-      <footer>
-        <p>© 2026 Sistema de Monitoramento de Escolta</p>
-        <p>Versão 1.0.0</p>
-      </footer>
     </div>
   );
 }

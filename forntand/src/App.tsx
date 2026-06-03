@@ -1,23 +1,10 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
-import Cadastro from "./pages/public/cadastro/Cadastro";
+import Inicio from "./pages/private/principal/Principal";
 
 
 function App() {
 
   return (
-    <>
-
-      <ToastContainer
-        autoClose={3000}
-        theme="dark"
-        pauseOnHover={false}
-        pauseOnFocusLoss={false}
-        closeOnClick
-      />
-      <Cadastro></Cadastro>
-    </>
+    Inicio
   );
 }
 export default App;
