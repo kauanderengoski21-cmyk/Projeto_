@@ -2,10 +2,12 @@ import { useState } from "react";
 import style from "./Cadastro.module.css";
 import { toast } from "react-toastify";
 
+
 function Cadastro() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [cnpj, setCnpj] = useState("");
+
 
   function exibirDados() {
     if (validarDados({ email, senha, cnpj })) {
