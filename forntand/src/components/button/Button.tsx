@@ -2,7 +2,7 @@
 
 type  props = {
     texto?:string;
-    click?: () => number;
+    click?: () => void;
     
 };
 
