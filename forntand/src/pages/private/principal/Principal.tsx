@@ -1,17 +1,18 @@
 import { useState } from "react";
 import styles from "./Principal.module.css";
+import type { Caminhoes } from "../../../interfaces/Caminhoes";
+import { Service } from "../../../components/services/Service";
 
 function Principal() {
+
+
   const [produtos, setProdutos] = useState(15);
   const [entregas, setEntregas] = useState(120);
   const [abaAtiva, setAbaAtiva] = useState("inicio");
+  const [veiculos, setVeiculos] = useState<Caminhoes[]>();
 
-  const abas = ["inicio", "entregas", "alertas", "relatorios"];
+  const abas = ["inicio", "entregas"];
 
-  const veiculos = [
-    ["Caminhão Scania N-01", "ABC-1234"],
-    ["Volvo FH Semipesado", "XYZ-5678"],
-  ];
 
   const alertas = [
     [
@@ -33,6 +34,19 @@ function Principal() {
     }
   };
 
+  async function buscarCaminhoes() {
+    try {
+      //TENTA FAZER ALGUMA COISA
+      const respostaBackend:Caminhoes[] = await Service.GET("ordem-servico/buscarCaminhoes");
+      setVeiculos(respostaBackend);
+
+    } catch (error) {
+      // DEU ERRO MOSTRA MENSAGEM 
+      console.log(error) 
+    }
+  }
+  
+
   return (
     <div className={styles.container}>
       <nav className={styles.barraNavegacao}>
@@ -43,7 +57,9 @@ function Principal() {
             <button
               key={aba}
               className={
-                abaAtiva === aba ? styles.abaAtiva : styles.botaoAba
+                abaAtiva === aba
+                  ? styles.abaAtiva
+                  : styles.botaoAba
               }
               onClick={() => setAbaAtiva(aba)}
             >
@@ -57,7 +73,10 @@ function Principal() {
         <div className={styles.cartaoPainel}>
           {abaAtiva === "inicio" && (
             <section>
-              <h1 className={styles.tituloSecao}>SOBRE O PROJETO</h1>
+              <h1 className={styles.tituloSecao}>
+                SOBRE O PROJETO
+              </h1>
+
               <p className={styles.subtituloSecao}>
                 Plataforma de segurança e rastreamento de cargas.
               </p>
@@ -76,7 +95,10 @@ function Principal() {
                     "Criptografia avançada e monitoramento contínuo das cargas.",
                 },
               ].map((item) => (
-                <div key={item.titulo} className={styles.blocoTexto}>
+                <div
+                  key={item.titulo}
+                  className={styles.blocoTexto}
+                >
                   <h3>{item.titulo}</h3>
                   <p>{item.texto}</p>
                 </div>
@@ -86,7 +108,9 @@ function Principal() {
 
           {abaAtiva === "entregas" && (
             <section>
-              <h1 className={styles.tituloSecao}>PAINEL DE ENTREGAS</h1>
+              <h1 className={styles.tituloSecao}>
+                PAINEL DE ENTREGAS
+              </h1>
 
               <div className={styles.gridStatus}>
                 <div className={styles.cardStatus}>
@@ -101,15 +125,27 @@ function Principal() {
               </div>
 
               <div className={styles.listaItens}>
-                {veiculos.map(([nome, placa]) => (
-                  <div key={placa} className={styles.itemLista}>
+                {veiculos?.map(caminhao => (
+                  <div
+                    key={caminhao.placa}
+                    className={styles.itemLista}
+                  >
                     <div className={styles.infoLista}>
-                      <span className={styles.nomeItem}>{nome}</span>
-                      <span className={styles.detalheItem}>{placa}</span>
+                      <span className={styles.nomeItem}>
+                        {caminhao.nome}
+                      </span>
+
+                      <span className={styles.detalheItem}>
+                        {caminhao.placa}
+                      </span>
                     </div>
-                    <span className={styles.badgeStatus}>Em Rota</span>
+
+                    <span className={styles.badgeStatus}>
+                      Em Rota
+                    </span>
                   </div>
-                ))}
+                )
+                )}
               </div>
 
               <button
@@ -118,52 +154,75 @@ function Principal() {
               >
                 Confirmar Conclusão de Entrega
               </button>
-            </section>
-          )}
 
-          {abaAtiva === "alertas" && (
-            <section>
-              <h1 className={styles.tituloSecao}>ALERTAS DE SEGURANÇA</h1>
+             <button
+                className={styles.botaoAcao}
+                onClick={buscarCaminhoes}
+              >
+                Buscar entrega
+              </button>
+
+              <hr className={styles.divisor} />
+
+              <h1 className={styles.tituloSecao}>
+                ALERTAS DE SEGURANÇA
+              </h1>
 
               <div className={styles.listaItens}>
-                {alertas.map(([titulo, descricao, status]) => (
-                  <div key={titulo} className={styles.itemLista}>
-                    <div className={styles.infoLista}>
-                      <span className={styles.nomeItem}>{titulo}</span>
-                      <span className={styles.detalheItem}>
-                        {descricao}
+                {alertas.map(
+                  ([titulo, descricao, status]) => (
+                    <div
+                      key={titulo}
+                      className={styles.itemLista}
+                    >
+                      <div className={styles.infoLista}>
+                        <span className={styles.nomeItem}>
+                          {titulo}
+                        </span>
+
+                        <span
+                          className={styles.detalheItem}
+                        >
+                          {descricao}
+                        </span>
+                      </div>
+
+                      <span
+                        className={styles.badgePerigo}
+                      >
+                        {status}
                       </span>
                     </div>
-
-                    <span className={styles.badgePerigo}>
-                      {status}
-                    </span>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
-            </section>
-          )}
-          {abaAtiva === "relatorios" && (
-            <section>
-              <h1 className={styles.tituloSecao}>RELATÓRIOS GERAIS</h1>
+
+              <hr className={styles.divisor} />
+
+              <h1 className={styles.tituloSecao}>
+                RELATÓRIOS GERAIS
+              </h1>
 
               <div className={styles.gridStatus}>
                 {[
                   ["Eficiência Geral", "98.4%"],
                   ["Alertas Resolvidos", "14/14"],
                 ].map(([titulo, valor]) => (
-                  <div key={titulo} className={styles.cardStatus}>
+                  <div
+                    key={titulo}
+                    className={styles.cardStatus}
+                  >
                     <p>{titulo}</p>
                     <h2>{valor}</h2>
                   </div>
                 ))}
               </div>
- 
+
               <div className={styles.blocoTexto}>
                 <h3>Resumo de Performance</h3>
                 <p>
-                  Tempo médio de resposta para alertas de risco:
-                  3 minutos.
+                  Tempo médio de resposta para alertas
+                  de risco: 3 minutos.
                 </p>
               </div>
             </section>
