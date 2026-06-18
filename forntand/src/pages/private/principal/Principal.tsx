@@ -9,9 +9,10 @@ function Principal() {
   const [produtos, setProdutos] = useState(15);
   const [entregas, setEntregas] = useState(120);
   const [abaAtiva, setAbaAtiva] = useState("inicio");
-  const [veiculos, setVeiculos] = useState<Caminhoes[]>();
-
-  const abas = ["inicio", "entregas"];
+  const [veiculos, setVeiculos] = useState<Caminhoes[]>([]);
+  const [termoBusca, setTermoBusca] = useState("");
+  
+  const abas = ["inicio", "entregas", "pesquisa"];
 
 
   const alertas = [
@@ -31,6 +32,7 @@ function Principal() {
     if (produtos > 0) {
       setProdutos((p) => p - 1);
       setEntregas((e) => e + 1);
+      
     }
   };
 
@@ -46,6 +48,16 @@ function Principal() {
     }
   }
   
+  const veiculosFiltrados = veiculos?.filter((caminhao) =>
+    caminhao.nome.toLowerCase().includes(termoBusca.toLowerCase()) ||
+    caminhao.placa.toLowerCase().includes(termoBusca.toLowerCase())
+  );
+
+  const alertasFiltrados = alertas.filter(
+    ([titulo, descricao]) =>
+      titulo.toLowerCase().includes(termoBusca.toLowerCase()) ||
+      descricao.toLowerCase().includes(termoBusca.toLowerCase())
+  );
 
   return (
     <div className={styles.container}>
@@ -68,7 +80,8 @@ function Principal() {
           ))}
         </div>
       </nav>
-
+      
+        
       <main className={styles.conteudoPrincipal}>
         <div className={styles.cartaoPainel}>
           {abaAtiva === "inicio" && (
@@ -105,6 +118,7 @@ function Principal() {
               ))}
             </section>
           )}
+
 
           {abaAtiva === "entregas" && (
             <section>
@@ -208,7 +222,7 @@ function Principal() {
                   ["Eficiência Geral", "98.4%"],
                   ["Alertas Resolvidos", "14/14"],
                 ].map(([titulo, valor]) => (
-                  <div
+                  <div  
                     key={titulo}
                     className={styles.cardStatus}
                   >
@@ -222,8 +236,44 @@ function Principal() {
                 <h3>Resumo de Performance</h3>
                 <p>
                   Tempo médio de resposta para alertas
-                  de risco: 3 minutos.
+                  de risco: 3 minutes.
                 </p>
+              </div>
+            </section>
+          )}
+
+          {abaAtiva === "pesquisa" && (
+            <section className={styles.abaPesquisa}>
+              <h1>Pesquisa</h1>
+              <input
+                type="text"
+                placeholder="Buscar caminhões ou alertas..."
+                className={styles.inputPesquisa}
+                value={termoBusca}
+                onChange={(e) => setTermoBusca(e.target.value)}
+              />
+              <div className={styles.resultados}>
+                {termoBusca && (
+                  <>
+                    {veiculosFiltrados.length > 0 && <h3>Caminhões</h3>}
+                    {veiculosFiltrados.map((c) => (
+                      <p key={c.placa}>{c.nome} - {c.placa}</p>
+                    ))}
+
+                    {alertasFiltrados.length > 0 && <h3>Alertas</h3>}
+                    {alertasFiltrados.map(([titulo, descricao]) => (
+                      <p key={titulo}><strong>{titulo}:</strong> {descricao}</p>
+                    ))}
+                  </>
+                )}
+
+                {termoBusca && veiculosFiltrados.length === 0 && alertasFiltrados.length === 0 && (
+                  <p>Nenhum resultado encontrado.</p>
+                )}
+
+                {!termoBusca && (
+                  <p>Digite algo para iniciar a pesquisa.</p>
+                )}
               </div>
             </section>
           )}

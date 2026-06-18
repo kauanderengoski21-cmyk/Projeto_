@@ -182,12 +182,12 @@
 }
 
 .botaoAcao {
-  width: 100%;
+  
   background-color: #ffffff;
   color: #000000;
   border: 1px solid #ffffff;
   padding: 14px;
-  border-radius: 8px;
+  border-radius: 20px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
