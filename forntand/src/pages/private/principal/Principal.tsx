@@ -91,12 +91,12 @@ function Principal() {
 
               <input 
                 type="text"
-                placeholder="Buscar caminhões ou alertas..."
+                placeholder="Buscar caminhões..."
                 className={styles.inputPesquisa}
                 onChange={(e) => setPesquisa(e.target.value)}
               />
               <button className={styles.botaoAcao} onClick={buscarCaminhoes}>
-                Buscar entrega
+                Buscar
               </button>
 
               <div className={styles.gridStatus}>
