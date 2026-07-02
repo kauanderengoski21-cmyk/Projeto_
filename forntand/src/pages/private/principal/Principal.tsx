@@ -6,7 +6,7 @@ import { Service } from "../../../components/services/Service";
 function Principal() {
   const [veiculos, setVeiculos] = useState<Caminhoes[]>([]);
   const [pesquisa, setPesquisa] = useState("");
-
+  const [mostrarAviso, setMostrarAviso] = useState (false);
 
   async function buscarCaminhoes() {
     try {
@@ -127,9 +127,23 @@ function Principal() {
                 ))}
               </div>
 
-              <button className={styles.botaoAcao} onClick={finalizarEntrega}>
-                Confirmar Conclusão de Entrega
+              <button className={styles.botaoAcao} onClick={()=> setMostrarAviso (true)}
+              >
+                confirmar conclusao da entrega 
+                 
               </button>
+
+              {mostrarAviso && (
+                <div className={styles.aviso}>
+                  <p>Tem certeza que deseja continuar a confirmar a entrega ?</p>
+                  <button className={styles.botaoSim} onClick={finalizarEntrega}>Sim</button>
+
+                  <button className={styles.botaoNao} onClick={()=>
+                    setMostrarAviso (false)
+                  }>Não</button>
+
+                </div>
+              )}
 
               <hr className={styles.divisor} />
 
