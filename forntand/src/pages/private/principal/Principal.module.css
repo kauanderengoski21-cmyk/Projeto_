@@ -1,0 +1,219 @@
+.container {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.barraNavegacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #121212;
+  border-bottom: 1px solid #262626;
+  padding: 15px 30px;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.menuAbas {
+  display: flex;
+  gap: 10px;
+}
+
+.botaoAba {
+  background: none;
+  border: 1px solid transparent;
+  color: #a3a3a3;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.botaoAba:hover {
+  color: #ffffff;
+  background-color: #1a1a1a;
+}
+
+.abaAtiva {
+  color: #000000;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.conteudoPrincipal {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.cartaoPainel {
+  background-color: #121212;
+  border: 1px solid #262626;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 550px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+
+.tituloSecao {
+  font-size: 22px;
+  text-align: center;
+  margin: 0 0 6px 0;
+  font-weight: 600;
+}
+
+.subtituloSecao {
+  font-size: 13px;
+  color: #a3a3a3;
+  text-align: center;
+  margin: 0 0 25px 0;
+}
+
+.divisor {
+  border: 0;
+  height: 1px;
+  background-color: #262626;
+  margin: 20px 0;
+}
+
+.blocoTexto {
+  margin-bottom: 20px;
+}
+
+.blocoTexto h3 {
+  font-size: 14px;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+}
+
+.blocoTexto p {
+  font-size: 13px;
+  color: #a3a3a3;
+  margin: 0 0 4px 0;
+  line-height: 1.6;
+}
+
+.gridStatus {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.cardStatus {
+  flex: 1;
+  background-color: #1a1a1a;
+  border: 1px solid #262626;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.textoStatus {
+  font-size: 11px;
+  color: #a3a3a3;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+
+.numeroStatus {
+  font-size: 24px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.listaItens {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.itemLista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  border: 1px solid #262626;
+  padding: 12px 15px;
+  border-radius: 8px;
+}
+
+.infoLista {
+  display: flex;
+  flex-direction: column;
+}
+
+.nomeItem {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detalheItem {
+  font-size: 11px;
+  color: #737373;
+}
+
+.badgeStatus {
+  font-size: 11px;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.botaoAcao {
+  
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-
+}
+
+.botaoNao {
+  background-color: #eee1e1;
+  color: rgb(216, 52, 52);
+  border: 4px solid #ffffff;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  box-sizing: border-
+ 
+}
+
+.botaoSim {
+  background-color: #ffffff;
+  color: rgb(117, 204, 18);
+  border: 4px solid #ffffff;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  box-sizing: border-box
+ 
+}
