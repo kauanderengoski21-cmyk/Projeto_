@@ -10,14 +10,14 @@ function Principal() {
 
   async function buscarCaminhoes() {
     try {
-      //TENTA FAZER ALGUMA COISA
+      
       const respostaBackend: Caminhoes[] = await Service.GET(
         "ordem-servico/buscarCaminhoes",
         { pesquisa },
       );
       setVeiculos(respostaBackend);
     } catch (error) {
-      // DEU ERRO MOSTRA MENSAGEM
+      
       console.log(error);
     }
   }
