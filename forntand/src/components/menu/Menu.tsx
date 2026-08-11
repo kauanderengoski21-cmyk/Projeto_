@@ -9,7 +9,7 @@ const menuInstrucao: MenuInstrucao[] = [
   { label: "Inicio", path: "/principal" },
   { label: "Cadastro", path: "/cadastro" },
   { label: "Login", path: "/login" },
-  { label: "configuracao", path: ""}
+  { label: "configuracao", path: "/config"}
 ];
 
 const Menu: React.FC = () => {

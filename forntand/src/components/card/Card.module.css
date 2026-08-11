@@ -1,0 +1,33 @@
+.card {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    box-shadow: 12px 2px 8px gray;
+}
+
+.card:hover {
+    transform: translateY(43px);
+}
+
+.card img {
+    height: 100px;
+    width: 85%;
+
+    aspect-ratio: 10px/80px;
+    object-fit: cover;
+}
+
+.card .titulo {
+    font-size: 18px;
+    margin: 0px 0px 8px;
+
+}
+
+.card .valor{
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+}
+

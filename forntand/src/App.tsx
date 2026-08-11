@@ -7,6 +7,7 @@ import Login from "./pages/public/login/Login";
 import Principal from "./pages/private/principal/Principal";
 import Seguranca from "./components/menu/Seguranca";
 
+
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
           }
         />
 
+       
               <Route
           path="/login"
           element={
