@@ -3,7 +3,7 @@ import style from "./Login.module.css";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Service } from "../../../components/services/Service";
-
+import type { loginInterface } from "../../../interfaces/Login";
 
 function Login() {
   const navigate = useNavigate();
@@ -14,19 +14,23 @@ function Login() {
     if (validarDados({ email, password })) {
       toast.success("Login realizado com sucesso!");
       console.log("Email:", email);
-      navigate("/home");
       
-      try{  
-    const  respostaDoServidor = await Service.GET("efetuarLogin", {
-        email: email,
-        senha: password,
-      });
 
-      console.log (respostaDoServidor);
-    
-    } catch (erro) {
-      console.log (erro);
-    }
+      try {
+        const respostaDoServidor: loginInterface = await Service.POST(
+          "autenticacao/login",
+          {
+            email: email,
+            senha: password,
+          },
+        );
+        navigate("/principal");
+        localStorage.setItem("token", respostaDoServidor.token);
+
+        console.log(respostaDoServidor);
+      } catch (erro) {
+        console.log(erro);
+      }
     }
   }
   function validarDados({
@@ -56,8 +60,6 @@ function Login() {
   }
 
   return (
-
-    
     <div className={style.conteiner}>
       <div className={style.acesso}>
         <h1>Login</h1>
