@@ -20,6 +20,9 @@ function Login() {
         const respostaDoServidor: loginInterface = await Service.POST(
           "autenticacao/login",
           {
+            codigo: Number;
+            idade: Number;
+            nome: String;
             email: email,
             senha: password,
           },
