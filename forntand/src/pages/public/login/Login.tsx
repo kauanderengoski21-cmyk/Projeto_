@@ -17,15 +17,19 @@ function Login() {
       
 
       try {
-        const respostaDoServidor: loginInterface = await Service.POST(
-          "autenticacao/login",
-          {
-            codigo: Number;
-            idade: Number;
-            nome: String;
+
+        const parametrosParaEnviarBackend = {
+            codigo: 0,
+            idade: 19,
+            nome: "A",
             email: email,
             senha: password,
-          },
+
+          }
+
+        const respostaDoServidor: loginInterface = await Service.POST(
+          "autenticacao/login",
+          parametrosParaEnviarBackend
         );
         navigate("/principal");
         localStorage.setItem("token", respostaDoServidor.token);
