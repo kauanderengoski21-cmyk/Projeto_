@@ -21,7 +21,7 @@ function Login() {
         const parametrosParaEnviarBackend = {
             codigo: 0,
             idade: 19,
-            nome: "A",
+            nome: "Kauan",
             email: email,
             senha: password,
 
