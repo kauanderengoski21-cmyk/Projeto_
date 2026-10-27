@@ -68,17 +68,9 @@
   background-color: #004499;
 }
 
-/** celular **/
+
 @media (max-width: 300px) {
   .acesso {
     background-color: red;
-  }
-}
-
-
-/** maior que computador **/
-@media (min-width: 800px) {
-  .acesso {
-    background-color: green;
   }
 }

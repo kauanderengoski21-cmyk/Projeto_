@@ -6,18 +6,16 @@ import { Service } from "../../../components/services/Service";
 function Principal() {
   const [veiculos, setVeiculos] = useState<Caminhoes[]>([]);
   const [pesquisa, setPesquisa] = useState("");
-  const [mostrarAviso, setMostrarAviso] = useState (false);
+  const [mostrarAviso, setMostrarAviso] = useState(false);
 
   async function buscarCaminhoes() {
     try {
-      
       const respostaBackend: Caminhoes[] = await Service.GET(
         "ordem-servico/buscarCaminhoes",
-        { pesquisa },
+        { pesquisa }
       );
       setVeiculos(respostaBackend);
     } catch (error) {
-      
       console.log(error);
     }
   }
@@ -32,17 +30,19 @@ function Principal() {
     if (produtos > 0) {
       setProdutos((p) => p - 1);
       setEntregas((e) => e + 1);
+      setMostrarAviso(false);
     }
   };
 
   return (
     <div className={styles.container}>
       <nav className={styles.barraNavegacao}>
-        <div className={styles.logo}>SISTEMA ESCOLTA</div>
+        <div className={styles.logo}>SISTEMA DE ESCOLTA</div>
 
         <div className={styles.menuAbas}>
           {abas.map((aba) => (
             <button
+              type="button"
               key={aba}
               className={abaAtiva === aba ? styles.abaAtiva : styles.botaoAba}
               onClick={() => setAbaAtiva(aba)}
@@ -57,24 +57,24 @@ function Principal() {
         <div className={styles.cartaoPainel}>
           {abaAtiva === "inicio" && (
             <section>
-              <h1 className={styles.tituloSecao}>SOBRE O PROJETO</h1>
+              <h1 className={styles.tituloSecao}>Sobre o Sistema</h1>
 
               <p className={styles.subtituloSecao}>
-                Plataforma de segurança e rastreamento de cargas.
+                Plataforma de monitoramento, segurança e rastreio de cargas.
               </p>
 
               <hr className={styles.divisor} />
 
               {[
                 {
-                  titulo: "Como Funciona",
+                  titulo: "Funcionamento",
                   texto:
-                    "O sistema gerencia o transporte de mercadorias valiosas em tempo real.",
+                    "O sistema gerencia o transporte de mercadorias de alto valor em tempo real, com controle operacional e acompanhamento contínuo.",
                 },
                 {
-                  titulo: "Estabilidade e Segurança",
+                  titulo: "Segurança e Confiabilidade",
                   texto:
-                    "Criptografia avançada e monitoramento contínuo das cargas.",
+                    "A estrutura foi desenvolvida para garantir monitoramento, proteção das cargas e resposta rápida a eventos críticos.",
                 },
               ].map((item) => (
                 <div key={item.titulo} className={styles.blocoTexto}>
@@ -87,21 +87,21 @@ function Principal() {
 
           {abaAtiva === "entregas" && (
             <section>
-              <h1 className={styles.tituloSecao}>PAINEL DE ENTREGAS</h1>
+              <h1 className={styles.tituloSecao}>Painel de Entregas</h1>
 
-              <input 
+              <input
                 type="text"
                 placeholder="Buscar caminhões..."
                 className={styles.inputPesquisa}
                 onChange={(e) => setPesquisa(e.target.value)}
               />
-              <button className={styles.botaoAcao} onClick={buscarCaminhoes}>
+              <button type="button" className={styles.botaoAcao} onClick={buscarCaminhoes}>
                 Buscar
               </button>
 
               <div className={styles.gridStatus}>
                 <div className={styles.cardStatus}>
-                  <p>No Transporte</p>
+                  <p>Em Transporte</p>
                   <h2>{produtos}</h2>
                 </div>
 
@@ -122,40 +122,48 @@ function Principal() {
                       </span>
                     </div>
 
-                    <span className={styles.badgeStatus}>Em Rota</span>
+                    <span className={styles.badgeStatus}>Em rota</span>
                   </div>
                 ))}
               </div>
 
-              <button className={styles.botaoAcao} onClick={()=> setMostrarAviso (true)}
+              <button
+                type="button"
+                className={styles.botaoAcao}
+                onClick={() => setMostrarAviso(true)}
               >
-                confirmar conclusao da entrega 
-                 
+                Confirmar conclusão da entrega
               </button>
 
               {mostrarAviso && (
                 <div className={styles.aviso}>
-                  <p>Tem certeza que deseja continuar a confirmar a entrega ?</p>
-                  <button className={styles.botaoSim} onClick={finalizarEntrega}>Sim</button>
+                  <p>Confirma a conclusão desta entrega?</p>
 
-                  <button className={styles.botaoNao} onClick={()=>
-                    setMostrarAviso (false)
-                  }>Não</button>
+                  <button type="button" className={styles.botaoSim} onClick={finalizarEntrega}>
+                    Sim
+                  </button>
 
+                  <button
+                    type="button"
+                    className={styles.botaoNao}
+                    onClick={() => setMostrarAviso(false)}
+                  >
+                    Não
+                  </button>
                 </div>
               )}
 
               <hr className={styles.divisor} />
 
-              <h1 className={styles.tituloSecao}>ALERTAS DE SEGURANÇA</h1>
+              <h1 className={styles.tituloSecao}>Alertas de Segurança</h1>
 
               <hr className={styles.divisor} />
 
-              <h1 className={styles.tituloSecao}>RELATÓRIOS GERAIS</h1>
+              <h1 className={styles.tituloSecao}>Relatórios Gerais</h1>
 
               <div className={styles.gridStatus}>
                 {[
-                  ["Eficiência Geral", "98.4%"],
+                  ["Eficiência Operacional", "98,4%"],
                   ["Alertas Resolvidos", "14/14"],
                 ].map(([titulo, valor]) => (
                   <div key={titulo} className={styles.cardStatus}>
@@ -166,8 +174,8 @@ function Principal() {
               </div>
 
               <div className={styles.blocoTexto}>
-                <h3>Resumo de Performance</h3>
-                <p>Tempo médio de resposta para alertas de risco: 3 minutes.</p>
+                <h3>Resumo de Desempenho</h3>
+                <p>Tempo médio de resposta para alertas de risco: 3 minutos.</p>
               </div>
             </section>
           )}
@@ -178,5 +186,3 @@ function Principal() {
 }
 
 export default Principal;
-
-
