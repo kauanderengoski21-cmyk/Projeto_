@@ -113,12 +113,12 @@ function Principal() {
 
               <div className={styles.listaItens}>
                 {veiculos?.map((caminhao) => (
-                  <div key={caminhao.placa} className={styles.itemLista}>
+                  <div key={caminhao.tx_placa} className={styles.itemLista}>
                     <div className={styles.infoLista}>
-                      <span className={styles.nomeItem}>{caminhao.nome}</span>
+                      <span className={styles.nomeItem}>{caminhao.tx_descricao}</span>
 
                       <span className={styles.detalheItem}>
-                        {caminhao.placa}
+                        {caminhao.tx_placa}
                       </span>
                     </div>
 
